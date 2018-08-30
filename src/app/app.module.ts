@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import {ProductService} from './services/product.service';
 import { CategoryComponent } from './pages/category/category.component';
+import {TransferHttpCacheModule} from '@nguniversal/common';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,9 +21,10 @@ const routes: Routes = [
     CategoryComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'my-app'}),
     HttpClientModule,
     RouterModule.forRoot(routes),
+    TransferHttpCacheModule,
   ],
   providers: [ProductService, Meta,
     Title,],
