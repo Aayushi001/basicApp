@@ -22,11 +22,10 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    Meta,
-    Title,
     RouterModule.forRoot(routes),
   ],
-  providers: [ProductService],
+  providers: [ProductService, Meta,
+    Title,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
