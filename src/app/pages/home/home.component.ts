@@ -10,6 +10,7 @@ import { Meta, Title } from '@angular/platform-browser';
 export class HomeComponent implements OnInit {
 
   categories : any;
+  homeDes = 'Home Description';
 
   constructor(public productService : ProductService, public meta : Meta, public title : Title ) { }
 
@@ -18,11 +19,15 @@ export class HomeComponent implements OnInit {
     .then((result) => {
       this.categories = result;
       this.meta.addTags([
-        {name: 'description', content: 'Home Description'},
+        {name: 'description', content: this.homeDes},
         {name: 'author', content: 'Static Author'},
         {name: 'keywords', content: 'Home Keywords'}
       ]);
       this.title.setTitle( 'Home' );
+      const author = this.meta.getTag('name=author');
+    console.log(author.content); //talkingdotnet
+    const des = this.meta.getTag('name=description');
+    console.log(des.content); //talkingdotnet
 
     })
   }

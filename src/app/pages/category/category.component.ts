@@ -23,11 +23,10 @@ export class CategoryComponent implements OnInit {
       this.productService.getCategoryByUrl(catUrl)
       .then((result) => {
         this.category = result;
-        this.meta.addTags([
-          {name: 'description', content: this.category.metaDes},
-          {name: 'author', content: 'Static Author'},
-          {name: 'keywords', content: this.category.metaKeywords}
-        ]);
+        this.meta.updateTag({name: 'description', content: this.category.metaDes});
+        this.meta.updateTag({name: 'author', content: 'Static Author'});
+        this.meta.updateTag({name: 'keywords', content: this.category.metaKeywords});
+
         this.title.setTitle( this.category.metaTitle );
     const author = this.meta.getTag('name=author');
     console.log(author.content); //talkingdotnet
