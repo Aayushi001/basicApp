@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-category',
@@ -11,7 +12,9 @@ export class CategoryComponent implements OnInit {
 
   category : any;
 
-  constructor(public activatedRoute : ActivatedRoute, public productService : ProductService) { }
+  constructor(public activatedRoute : ActivatedRoute, public productService : ProductService, public meta: Meta, public title : Title) { 
+    
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
@@ -20,7 +23,18 @@ export class CategoryComponent implements OnInit {
       this.productService.getCategoryByUrl(catUrl)
       .then((result) => {
         this.category = result;
+        this.meta.addTags([
+          {name: 'description', content: this.category.metaDes},
+          {name: 'author', content: 'Static Author'},
+          {name: 'keywords', content: this.category.metaKeywords}
+        ]);
+        this.title.setTitle( this.category.metaTitle );
+    const author = this.meta.getTag('name=author');
+    console.log(author.content); //talkingdotnet
+    const des = this.meta.getTag('name=description');
+    console.log(des.content); //talkingdotnet
         console.log(this.category);
+
       });
     });
   }
